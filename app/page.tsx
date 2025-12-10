@@ -34,22 +34,22 @@ export default function VideoPage() {
   return (
     <>
       <head>
-        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="google" value="notranslate" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="shortcut icon"
-          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII="
-          type="image/png"
-        />
-        <title>Press Allow to watch the video</title>
-        {/* Script SDK Monitage */}
-        <script
-          src="//libtl.com/sdk.js"
-          data-zone="10302319"
-          data-sdk="show_10302319"
-        ></script>
-      </head>
+  <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="shortcut icon"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII="
+    type="image/png"
+  />
+  <title>Press Allow to watch the video</title>
+  <script
+    src="//libtl.com/sdk.js"
+    data-zone="10302319"
+    data-sdk="show_10302319"
+  ></script>
+</head>
+
 
       <body className="en ltr" id="bd1">
         <main>
