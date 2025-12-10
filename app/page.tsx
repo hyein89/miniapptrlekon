@@ -4,6 +4,14 @@ import { useEffect } from "react";
 import "./costom.css";
 
 export default function VideoPage() {
+  // ================================
+  // GANTI MODE IKLAN DI SINI
+  // "reward"  → Rewarded Interstitial
+  // "popup"   → Rewarded Popup
+  // "inapp"   → In-App Interstitial otomatis
+  // ================================
+  const AD_MODE = "reward";
+
   useEffect(() => {
     const bd1 = document.getElementById("bd1");
 
@@ -11,25 +19,50 @@ export default function VideoPage() {
       e.preventDefault();
       e.stopPropagation();
 
-      // ====== Rewarded Interstitial Monitage ======
-      if (typeof show_10302319 === "function") {
-        show_10302319()
-          .then(() => {
-            // User selesai menonton iklan
-            // Tambahkan kode reward di sini
-            console.log("User rewarded!"); 
-          })
-          .catch((e) => {
-            console.error("Error showing ad:", e);
-          });
+      // Pastikan fungsi montage sudah ada
+      const showFn = (window as any).show_10302319;
+      if (typeof showFn !== "function") {
+        console.warn("show_10302319 belum siap");
+        return;
+      }
+
+      // ================================
+      // MODE 1 → REWARDED INTERSTITIAL
+      // ================================
+      if (AD_MODE === "reward") {
+        showFn()
+          .then(() => console.log("Rewarded selesai"))
+          .catch(() => console.log("Gagal"));
+      }
+
+      // ================================
+      // MODE 2 → POPUP ('pop')
+      // ================================
+      if (AD_MODE === "popup") {
+        showFn("pop")
+          .then(() => console.log("Popup selesai"))
+          .catch(() => console.log("Gagal"));
+      }
+
+      // ================================
+      // MODE 3 → IN-APP INTERSTITIAL
+      // ================================
+      if (AD_MODE === "inapp") {
+        showFn({
+          type: "inApp",
+          inAppSettings: {
+            frequency: 2,
+            capping: 0.1,
+            interval: 30,
+            timeout: 5,
+            everyPage: false,
+          },
+        });
       }
     };
 
     bd1?.addEventListener("click", handleClick);
-
-    return () => {
-      bd1?.removeEventListener("click", handleClick);
-    };
+    return () => bd1?.removeEventListener("click", handleClick);
   }, []);
 
   return (
@@ -38,12 +71,10 @@ export default function VideoPage() {
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="google" content="notranslate" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="shortcut icon"
-          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII="
-          type="image/png"
-        />
+
         <title>Press Allow to watch the video</title>
+
+        {/* SDK Monitage */}
         <script
           src="//libtl.com/sdk.js"
           data-zone="10302319"
@@ -58,17 +89,11 @@ export default function VideoPage() {
               <div className="overlay"></div>
               <div className="loader visible">
                 <div className="lds-ring">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
+                  <div></div><div></div><div></div><div></div>
                 </div>
               </div>
-              <video
-                controls
-                controlsList="nodownload"
-                poster="./cf2e3416b3a95a90fc3c018f039f2c4b.jpg"
-              >
+
+              <video controls controlsList="nodownload" poster="./poster.jpg">
                 <source src="/movie.mp4" type="video/mp4" />
                 <source src="/movie.mp4" type="video/ogg" />
                 <source src="/movie.mp4" type="video/webm" />
