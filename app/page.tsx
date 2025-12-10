@@ -10,7 +10,7 @@ export default function VideoPage() {
   // "popup"   → Rewarded Popup
   // "inapp"   → In-App Interstitial otomatis
   // ================================
-  const AD_MODE: "reward" | "popup" | "inapp" = "reward";
+  const AD_MODE: string = "reward";
 
 
   useEffect(() => {
