@@ -5,33 +5,25 @@ import "./costom.css";
 
 export default function VideoPage() {
   useEffect(() => {
-    // ====== Rewarded Popup Monitage ======
-    const showRewardedAd = () => {
-      // pastikan SDK Monitage sudah terload dari <script src="//libtl.com/sdk.js" ...>
-      // contoh memanggil rewarded popup
-      // @ts-ignore
+    const bd1 = document.getElementById("bd1");
+
+    const handleClick = (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // ====== Rewarded Popup Monitage ======
       if (typeof show_10302319 === "function") {
-        // 'pop' = tipe popup
         show_10302319("pop")
           .then(() => {
-            // user menonton iklan sampai selesai
             console.log("User rewarded!");
-            // Bisa tambahkan fungsi reward di sini
+            // Tambahkan kode reward di sini jika perlu
           })
-          .catch((e: any) => {
+          .catch((e) => {
             console.error("Error playing ad:", e);
           });
       }
     };
 
-    // jalankan saat halaman load atau saat user klik video/container
-    // misal kita jalankan saat user klik main container
-    const bd1 = document.getElementById("bd1");
-    const handleClick = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showRewardedAd();
-    };
     bd1?.addEventListener("click", handleClick);
 
     return () => {
