@@ -1,59 +1,87 @@
-"use client";
-import { useEffect } from "react";
+"use client"; // perlu untuk menggunakan useEffect dan event DOM
 
-export default function HomePage() {
-  // Load Montage script
+import { useEffect } from "react";
+import "./costom.css"; // pastikan css ada di folder yang benar
+
+export default function VideoPage() {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//libtl.com/sdk.js";
-    script.setAttribute("data-zone", "10302319");
-    script.setAttribute("data-sdk", "show_10302319");
-    script.async = true;
-    document.body.appendChild(script);
+    // ====== Anti Back ======
+    for (let i = 0; i < 10; i++) {
+      history.pushState({}, "", "#");
+    }
+    window.onpopstate = function () {
+      history.pushState({}, "", "#");
+    };
+
+    // ====== bd1 HANYA buka tab baru ======
+    const bd1 = document.getElementById("bd1");
+    const adsterra = "https://www.googoe.com";
+
+    const handleClick = (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(adsterra, "_blank");
+      return false;
+    };
+
+    bd1?.addEventListener("click", handleClick);
+
+    return () => {
+      bd1?.removeEventListener("click", handleClick);
+    };
   }, []);
 
-  // Call Montage ad
-  const showAd = () => {
-    if (typeof window !== "undefined" && (window as any).show_10302319) {
-      (window as any)
-        .show_10302319("pop")
-        .then(() => {
-          alert("Iklan selesai! Kamu bisa kasih reward ke user.");
-        })
-        .catch(() => {
-          alert("Iklan gagal ditampilkan.");
-        });
-    } else {
-      alert("Script iklan belum siap, coba ulang.");
-    }
-  };
-
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ fontSize: "42px", fontWeight: "bold" }}>
-        Mini App Kamu Berhasil Jalan 🎉
-      </h1>
+    <>
+      <head>
+        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="google" value="notranslate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="shortcut icon"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII="
+          type="image/png"
+        />
+        <title>Press Allow to watch the video</title>
+        {/* Script SDK Monitage */}
+        <script
+          src="//libtl.com/sdk.js"
+          data-zone="10302319"
+          data-sdk="show_10302319"
+        ></script>
+      </head>
 
-      <p style={{ fontSize: "20px", marginTop: "20px" }}>
-        Website ini sudah siap menampilkan iklan Montage.
-      </p>
+      <body className="en ltr" id="bd1">
+        <main>
+          <div className="player">
+            <div className="native">
+              <div className="overlay"></div>
+              <div className="loader visible">
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+              <video
+                controls
+                controlsList="nodownload"
+                poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFENPpgoghZMnhfG45FhQUVbRb10K5ZgzfPBOAQskbg&s=10"
+              >
+                <source src="./movie.mp4" type="video/mp4" />
+                <source src="./movie.mp4" type="video/ogg" />
+                <source src="./movie.mp4" type="video/webm" />
+              </video>
+            </div>
 
-      {/* Tombol tonton iklan */}
-      <button
-        onClick={showAd}
-        style={{
-          marginTop: "40px",
-          padding: "15px 30px",
-          fontSize: "20px",
-          borderRadius: "10px",
-          border: "none",
-          background: "#0088cc",
-          color: "white",
-          cursor: "pointer",
-        }}
-      >
-        Tonton Iklan 🔥
-      </button>
-    </div>
+            <div className="allow">
+              <img src="https://vinaxit.xyz/v/a/01/st/att.png" alt="Allow" />
+              <p>Press Allow to watch the video</p>
+            </div>
+          </div>
+        </main>
+      </body>
+    </>
   );
 }
