@@ -11,16 +11,28 @@ export default function VideoPage() {
       e.preventDefault();
       e.stopPropagation();
 
-      // ====== Rewarded Popup Monitage ======
+      // ====== Rewarded Popup ======
       if (typeof show_10302319 === "function") {
         show_10302319("pop")
           .then(() => {
-            console.log("User rewarded!");
-            // Tambahkan kode reward di sini jika perlu
+            console.log("User rewarded from popup!");
+            // Tambahkan kode reward di sini
           })
-          .catch((e) => {
-            console.error("Error playing ad:", e);
-          });
+          .catch((err) => console.error("Error popup ad:", err));
+      }
+
+      // ====== In-App Interstitial ======
+      if (typeof show_10302319 === "function") {
+        show_10302319({
+          type: "inApp",
+          inAppSettings: {
+            frequency: 2,     // tampil 2 iklan
+            capping: 0.1,    // 0.1 jam = 6 menit
+            interval: 30,    // jeda 30 detik antar iklan
+            timeout: 5,      // delay 5 detik sebelum pertama muncul
+            everyPage: false // session tersimpan antar page
+          }
+        });
       }
     };
 
