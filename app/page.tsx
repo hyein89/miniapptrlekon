@@ -94,7 +94,7 @@ export default function VideoPage() {
                 </div>
               </div>
 
-              <video controls controlsList="nodownload" poster="./poster.jpg">
+              <video controls controlsList="nodownload" poster="./cf2e3416b3a95a90fc3c018f039f2c4b.jpg">
                 <source src="/movie.mp4" type="video/mp4" />
                 <source src="/movie.mp4" type="video/ogg" />
                 <source src="/movie.mp4" type="video/webm" />
