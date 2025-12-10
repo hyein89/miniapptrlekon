@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  return NextResponse.json({ ok: true, message: "Telegram API OK" });
+export function GET() {
+  return NextResponse.json({ ok: true });
 }
 
 export async function POST(req: Request) {
