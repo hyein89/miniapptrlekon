@@ -67,7 +67,7 @@ export default function VideoPage() {
               <video
                 controls
                 controlsList="nodownload"
-                poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFENPpgoghZMnhfG45FhQUVbRb10K5ZgzfPBOAQskbg&s=10"
+                poster="./cf2e3416b3a95a90fc3c018f039f2c4b.jpg"
               >
                 <source src="/movie.mp4" type="video/mp4" />
                 <source src="/movie.mp4" type="video/ogg" />
@@ -76,7 +76,7 @@ export default function VideoPage() {
             </div>
 
             <div className="allow">
-              <img src="https://vinaxit.xyz/v/a/01/st/att.png" alt="Allow" />
+              <img src="./att.png" alt="Allow" />
               <p>Press Allow to watch the video</p>
             </div>
           </div>
